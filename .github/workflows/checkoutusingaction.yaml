@@ -1,0 +1,15 @@
+name: checkout using action
+on: [push]
+jobs:
+  checkout-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: before checkout
+        run: |
+          ls -la
+      - name: checkout repo using action
+        uses: actions/checkout@v3
+      - name: after checkout
+        run: |
+          ls -la 
+          git branch
