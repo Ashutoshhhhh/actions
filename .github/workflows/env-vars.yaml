@@ -1,6 +1,8 @@
 name: Env vars
 on: [push]
 run-name: Env vars
+env:
+  TOP_LEVEL_VAR: "THIS is a top level "
 jobs:
   env-vars:
     runs-on: ubuntu-latest
@@ -11,3 +13,26 @@ jobs:
       - name: Log context
         run: |
             echo "GITHUB_REF ${{ github.ref }}"
+  checking-first:
+    runs-on: ubuntu-latest
+    env:
+      SECOND_LEVEL_VAR: "TIS IS SECOND"
+    steps:
+      - name: view env vars
+        env:
+          THIRD_LEVEL_VAR: "THIS IS THIRD"
+          TOP_LEVEL_VAR: "OVERRITED TOP LEVEL"
+        run: |
+            echo "GITHUB_SHA:" $GITHUB_SHA
+            echo "TOP_LEVEL_VAR:" $TOP_LEVEL_VAR
+            echo "SECOND_LEVEL_VAR:" $SECOND_LEVEL_VAR
+            echo "THIRD_LEVEL_VAR:" $THIRD_LEVEL_VAR
+            echo "${{ env.SECOND_LEVEL_VAR}}"
+  chekking-trhid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: view top level
+        run: |
+            echo "TOP_LEVEL_VAR:" $TOP_LEVEL_VAR
+            echo "${{ env.TOP_LEVEL_VAR}}"
+    
