@@ -3,6 +3,7 @@ on: [push]
 jobs:
   checkout-repo:
     runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
     steps:
       - name: list files before checkout
         run: |
