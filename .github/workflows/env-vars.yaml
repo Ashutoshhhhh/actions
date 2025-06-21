@@ -1,0 +1,13 @@
+name: Env vars
+on: [push]
+run-name: Env vars
+jobs:
+  env-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: view env vars
+        run: |
+            echo "GITHIB_SHA:" $GITHUB_SHA
+      - name: Log context
+        run: |
+            echo "GITHUB_REF ${{ github.ref }}"
